@@ -3,6 +3,8 @@
 - General Info
 - Technologies
 - Setup
+- Process -CI/CD pipeline
+- Screenshots
 
 
 ## General Info
