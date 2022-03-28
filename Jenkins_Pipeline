@@ -14,54 +14,54 @@ pipeline {
             }
         }
         stage('Push-Dockerfile to Ansible server') {
-        	steps {
-				sshagent(['ec2-user']) {
+            steps {
+	        sshagent(['ec2-user']) {
 
-				    sh 'scp /var/lib/jenkins/workspace/kubernetes_deployment/Docker* ec2-user@$AWS_IP:~/ansible/'
-				}        	
-        	}
+	           sh 'scp /var/lib/jenkins/workspace/kubernetes_deployment/Docker* ec2-user@$AWS_IP:~/ansible/'
+	        }        	
+            }
         }
         stage('Docker Build & Tag') {
-        	steps {
-				sshagent(['ec2-user']) {
+	    steps {
+		sshagent(['ec2-user']) {
 
-				    sh '''
-				    	ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker build . -t $JOB_NAME:v1.$BUILD_ID" 
-				    	ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker tag $JOB_NAME:v1.$BUILD_ID inverseinfinity/$JOB_NAME:latest"
-				    '''
-				}        	
-        	}
+		    sh '''
+			ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker build . -t $JOB_NAME:v1.$BUILD_ID" 
+			ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker tag $JOB_NAME:v1.$BUILD_ID inverseinfinity/$JOB_NAME:latest"
+		    '''
+		}        	
+	   }
         }
         stage('Docker login & push to Docker Hub, once done delete the images') {
-        	steps {
-				sshagent(['ec2-user']) {
+	    steps {
+		sshagent(['ec2-user']) {
 
-				    sh '''
-				    	ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker login -u inverseinfinity -p $PASS" 
-				    	ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker push inverseinfinity/$JOB_NAME:latest"
-				    	ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker image rm inverseinfinity/$JOB_NAME:latest $JOB_NAME:v1.$BUILD_ID "
-				    '''
-				}        	
-        	}
+		    sh '''
+			ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker login -u inverseinfinity -p $PASS" 
+			ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker push inverseinfinity/$JOB_NAME:latest"
+			ssh ec2-user@$AWS_IP "cd ~/ansible/ && docker image rm inverseinfinity/$JOB_NAME:latest $JOB_NAME:v1.$BUILD_ID "
+		    '''
+		}        	
+	    }
         }
         stage('Copy deployment and playbook yaml files to ansible server') {
-        	steps {
-				sshagent(['ec2-user']) {
+	    steps {
+		sshagent(['ec2-user']) {
 
-				    	sh 'scp /var/lib/jenkins/workspace/kubernetes_deployment/*.yml ec2-user@$AWS_IP:~/ansible/' 
-				}        	
-        	}
+			sh 'scp /var/lib/jenkins/workspace/kubernetes_deployment/*.yml ec2-user@$AWS_IP:~/ansible/' 
+		}        	
+	    }
         }
         stage('Running Kubernetes Deployment using Ansible Playbook') {
-        	steps {
-				sshagent(['ec2-user']) {
+	    steps {
+		sshagent(['ec2-user']) {
 
-				    sh '''
-				    	ssh ec2-user@$AWS_IP "cd ~/ansible/ && ansible webserver"
-				    	ssh ec2-user@$AWS_IP "cd ~/ansible/ && ansible-playbook kubernetes-playbook.yml" 
-				    '''
-				}        	
-        	}
+		    sh '''
+			ssh ec2-user@$AWS_IP "cd ~/ansible/ && ansible webserver"
+			ssh ec2-user@$AWS_IP "cd ~/ansible/ && ansible-playbook kubernetes-playbook.yml" 
+		    '''
+		}        	
+	    }
         }            
     }
     post {
