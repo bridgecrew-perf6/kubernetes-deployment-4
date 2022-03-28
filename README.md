@@ -53,17 +53,19 @@ On top ansible, we also need Docker to build docker image, for installation guid
 On the second VM instance, install Kubernetes to setup Kubernetes, please refer my Kubernetes installation guide on [here](https://github.com/nav-InverseInfinity/kubernetes-setup)
 
 Similarly, on the third instance, install Jenkins for Continuous Integration and Continuous Deployment. To setup Jenkins please refer my Jenkins installation guide on [here](https://github.com/nav-InverseInfinity/Jenkins-setup)
-### Project Source file
+
+
+### Project Source file - [refer here](https://github.com/nav-InverseInfinity/kubernetes-source-files)
 
 Now that we have all the resources, we can start writing the codes for the project.
 
-* Dockerfile(link)
+* Dockerfile
 
-* Kubernetes Deployment & Service file in yml format (link)
+* Kubernetes Deployment & Service file in yml format 
 
-* Ansible playbook to copy the file and deploy on Kubernetes Cluster (link)
+* Ansible playbook to copy the file and deploy on Kubernetes Cluster 
 
-* Ansible playbook to run a shell script on Kubernetes server to display the ip & port where our website deployment is running so we can view it on browser (link)
+* Ansible playbook to run a shell script on Kubernetes server to display the ip & port where our website deployment is running so we can view it on browser 
 
 
 
@@ -89,7 +91,7 @@ vi authorized_keys
 
 ## Process - CI/CD Pipeline
 
-Plan is to build Jenkins CI/CD pipeline, with environmental variables so we can our docker login password and AWS IP as “**secret text**”. DockerHub password = **PASS** and AWS IP = **AWS_IP**
+Plan is to build Jenkins CI/CD pipeline, with environmental variables so we can pass in our credentials as a secret -  docker login password and AWS IP as “**secret text**”. DockerHub password = **PASS** and AWS IP = **AWS_IP**
 
 ### CI/CD Stages refer [here](https://github.com/nav-InverseInfinity/kubernetes-deployment/blob/main/Jenkins_Pipeline)
 
