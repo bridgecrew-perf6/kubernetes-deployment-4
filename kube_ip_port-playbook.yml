@@ -1,0 +1,15 @@
+---
+
+- hosts: webserver
+  become_user: root
+  become: true
+
+  tasks:
+  - script: kube-ip-port.sh
+    register: results
+  - debug:
+      var: results.stdout
+
+
+
+
