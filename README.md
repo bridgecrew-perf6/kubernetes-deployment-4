@@ -29,7 +29,12 @@ First thing is to write a Docker file where we can run Apache (httpd) webserver 
 
 ## Setup
 
-As per the aim of this project, we need 3 VM instances, here we are using AWS EC2 instances, Install Ansible on ansible server for deployment and install minikube to run Kubernetes cluster in order run the Kubernetes deployment.
+As per the aim of this project, we need 3 VM instances,here we are using AWS EC2 instances.
+ 1. Jenkins server
+ 2. Ansible server
+ 3. Kubernetes server
+
+Install Ansible on ansible server for deployment and install minikube to run Kubernetes cluster in order run the Kubernetes deployment.
 
 ### Ansible installation for amazon-linux-2
 ```bash
