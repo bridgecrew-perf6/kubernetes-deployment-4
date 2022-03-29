@@ -55,11 +55,11 @@ ansible –version
 
 
 
-On top ansible, we also need Docker to build docker image, for installation guide follow my docker-setup [repo]([https://github.com/nav-InverseInfinity/docker-setup](https://github.com/nav-InverseInfinity/docker-setup))
+On top ansible, we also need Docker to build docker image, for installation guide follow my docker-setup [repo](https://github.com/nav-InverseInfinity/docker-setup)
 
 On the second VM instance, install Kubernetes to setup Kubernetes, please refer my Kubernetes installation guide on [here](https://github.com/nav-InverseInfinity/kubernetes-setup)
 
-Similarly, on the third instance, install Jenkins for Continuous Integration and Continuous Deployment. To setup Jenkins please refer my Jenkins installation guide on [here](https://github.com/nav-InverseInfinity/Jenkins-setup)
+Similarly, on the third instance, install Jenkins for Continuous Integration and Continuous Deployment. To setup Jenkins please refer my Jenkins installation guide on [here](https://github.com/nav-InverseInfinity/Jenkins-setup/blob/main/README.md)
 
 
 ### Project Source file - [refer here](https://github.com/nav-InverseInfinity/kubernetes-source-files)
@@ -76,7 +76,7 @@ Now that we have all the resources, we can start writing the codes for the proje
 
 
 
-In order to automate the whole CI/CD environment, we will have to establish the connections between servers and do some ground work. Since we are going to connect to our ansible server, we will have to install “**SSH-Agent**” plugin and make the connection, please refer my guide to Jenkins connections [repo]([https://github.com/nav-InverseInfinity/Jenkins-setup](https://github.com/nav-InverseInfinity/Jenkins-setup)).
+In order to automate the whole CI/CD environment, we will have to establish the connections between servers and do some ground work. Since we are going to connect to our ansible server, we will have to install “**SSH-Agent**” plugin and make the connection, please refer my guide to Jenkins connections [repo](https://github.com/nav-InverseInfinity/Jenkins-setup/blob/main/Jenkins-Config.md)
 
 
 We should also establish connection between Ansible server and Kubernetes server via ssh
